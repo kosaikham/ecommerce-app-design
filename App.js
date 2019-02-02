@@ -1,21 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text, View } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import Login from "./src/views/Login";
+import Register from "./src/views/Register";
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    return <AppContainer />;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const StackNavigator = createStackNavigator(
+  {
+    Login: {
+      screen: Login
+    },
+    Register: {
+      screen: Register
+    }
   },
-});
+  {
+    initialRouteName: "Login"
+  }
+);
+
+const AppContainer = createAppContainer(StackNavigator);
