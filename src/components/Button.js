@@ -1,13 +1,14 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
-const Button = ({ backgroundColor, text }) => {
+const Button = ({ backgroundColor, text, onPress, fullWidth }) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.5}
       style={{
         backgroundColor: backgroundColor,
-        width: 150,
+        width: fullWidth ? null : 150,
         justifyContent: "center",
         alignItems: "center",
         height: 50,

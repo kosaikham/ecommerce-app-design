@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  ImageBackground,
-  Dimensions,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, ImageBackground, Dimensions } from "react-native";
 import Button from "../components/Button";
-
-const { width, height } = Dimensions.get("window");
 
 class Login extends Component {
   static navigationOptions = {
     header: null
   };
+
+  onPressRegister = () => {
+    this.props.navigation.navigate("Register");
+  };
+
   render() {
     return (
       <View
@@ -55,7 +52,11 @@ class Login extends Component {
           {/* Image part */}
           <ImageBackground
             source={require("../../assets/login_bg_1.jpg")}
-            style={{ flex: 1, width: null, height: null, resizeMode: "cover" }}
+            style={{
+              flex: 1,
+              width: null,
+              height: 550
+            }}
           >
             <View
               style={{
@@ -66,11 +67,16 @@ class Login extends Component {
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-around",
-                  paddingBottom: 40
+                  justifyContent: "space-between",
+                  paddingBottom: 40,
+                  paddingHorizontal: 20
                 }}
               >
-                <Button backgroundColor="#F08C4F" text="Register" />
+                <Button
+                  onPress={this.onPressRegister}
+                  backgroundColor="#F08C4F"
+                  text="Register"
+                />
                 <Button backgroundColor="#5BBC9D" text="Login" />
               </View>
             </View>
