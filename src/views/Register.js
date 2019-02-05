@@ -23,6 +23,10 @@ class Register extends Component {
     })
   };
 
+  onPressCompleteRegister = () => {
+    this.props.navigation.navigate("DrawerNavigator");
+  };
+
   componentWillMount() {
     this.formPosition = new Animated.Value(0);
     this.animatedTitleOpacity = new Animated.Value(1);
@@ -59,10 +63,6 @@ class Register extends Component {
     } else {
       duration = event.duration;
     }
-    // Animated.timing(this.formPosition, {
-    //   duration: duration,
-    //   toValue: -hp("8.25%")
-    // }).start();
     Animated.parallel([
       Animated.timing(this.formPosition, {
         duration: duration,
@@ -81,10 +81,6 @@ class Register extends Component {
     } else {
       duration = event.duration;
     }
-    // Animated.timing(this.formPosition, {
-    //   duration: duration,
-    //   toValue: 0
-    // }).start();
     Animated.parallel([
       Animated.timing(this.formPosition, {
         duration: duration,
@@ -174,7 +170,7 @@ class Register extends Component {
             >
               <Button
                 fullWidth
-                onPress={this.onPressRegister}
+                onPress={this.onPressCompleteRegister}
                 backgroundColor="#F08C4F"
                 text="Complete registration"
               />

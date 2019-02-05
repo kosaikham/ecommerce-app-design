@@ -7,10 +7,6 @@ import {
 import Button from "../components/Button";
 
 class Login extends Component {
-  static navigationOptions = {
-    header: null
-  };
-
   onPressRegister = () => {
     this.props.navigation.navigate("Register");
   };

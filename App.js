@@ -1,7 +1,15 @@
 import React from "react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { View, Text, TouchableOpacity } from "react-native";
+import {
+  createStackNavigator,
+  createAppContainer,
+  createDrawerNavigator,
+  DrawerActions
+} from "react-navigation";
+import { Ionicons } from "@expo/vector-icons";
 import Login from "./src/views/Login";
 import Register from "./src/views/Register";
+import Home from "./src/views/Home";
 import Demo from "./src/views/Playground";
 
 export default class App extends React.Component {
@@ -10,11 +18,37 @@ export default class App extends React.Component {
   }
 }
 
+const customComponent = props => {
+  return (
+    <View
+      style={{
+        flex: 1
+      }}
+      {...props}
+    >
+      <Text>CustomComponent</Text>
+    </View>
+  );
+};
+
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Home: {
+      screen: Home
+    }
+  },
+  {
+    initialRouteName: "Home",
+    contentComponent: customComponent
+  }
+);
+
 const StackNavigator = createStackNavigator(
   {
     Login: {
       screen: Login,
       navigationOptions: () => ({
+        header: null,
         headerBackTitle: null
       })
     },
@@ -23,15 +57,34 @@ const StackNavigator = createStackNavigator(
       navigationOptions: () => ({
         headerStyle: {
           backgroundColor: "#F6F6F6"
-        }
+        },
+        headerBackTitle: null
       })
     },
     Demo: {
       screen: Demo
+    },
+    DrawerNavigator: {
+      screen: DrawerNavigator,
+      navigationOptions: ({ navigation }) => ({
+        header: null
+      })
+      // navigationOptions: ({ navigation }) => ({
+      //   title: "React"
+      //   // headerLeft: (
+      //   //   <TouchableOpacity
+      //   //     onPress={() => {
+      //   //       navigation.dispatch(DrawerActions.toggleDrawer());
+      //   //     }}
+      //   //   >
+      //   //     <Ionicons name="md-menu" color="red" size={30} />
+      //   //   </TouchableOpacity>
+      //   // )
+      // })
     }
   },
   {
-    initialRouteName: "Register"
+    initialRouteName: "Login"
   }
 );
 
