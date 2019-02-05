@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 
-class Home extends Component {
+class Payment extends Component {
   render() {
     return (
       <View
@@ -11,14 +11,14 @@ class Home extends Component {
           alignItems: "center"
         }}
       >
-        <Text>Home</Text>
+        <Text>Payment</Text>
         <Button
-          title="go to category"
-          onPress={() => this.props.navigation.navigate("Category")}
+          title="go to TermsAndConditions"
+          onPress={() => this.props.navigation.navigate("TermsAndConditions")}
         />
       </View>
     );
   }
 }
 
-export default Home;
+export default Payment;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 
-class Home extends Component {
+class CustomDrawerComponent extends Component {
   render() {
     return (
       <View
@@ -11,14 +11,14 @@ class Home extends Component {
           alignItems: "center"
         }}
       >
-        <Text>Home</Text>
+        <Text> CustomDrawerComponent </Text>
         <Button
-          title="go to category"
-          onPress={() => this.props.navigation.navigate("Category")}
+          title="go to Basket"
+          onPress={() => this.props.navigation.navigate("Basket")}
         />
       </View>
     );
   }
 }
 
-export default Home;
+export default CustomDrawerComponent;

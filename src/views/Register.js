@@ -15,16 +15,8 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 
 class Register extends Component {
-  static navigationOptions = {
-    ...Platform.select({
-      android: {
-        header: null
-      }
-    })
-  };
-
   onPressCompleteRegister = () => {
-    this.props.navigation.navigate("DrawerNavigator");
+    this.props.navigation.navigate("Home");
   };
 
   componentWillMount() {

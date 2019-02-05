@@ -1,16 +1,23 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
 import {
   createStackNavigator,
+  createSwitchNavigator,
   createAppContainer,
   createDrawerNavigator,
-  DrawerActions
+  createMaterialTopTabNavigator
 } from "react-navigation";
-import { Ionicons } from "@expo/vector-icons";
+import Icon from "@expo/vector-icons/Ionicons";
 import Login from "./src/views/Login";
 import Register from "./src/views/Register";
 import Home from "./src/views/Home";
-import Demo from "./src/views/Playground";
+import Category from "./src/views/Category";
+import Detail from "./src/views/Detail";
+import Basket from "./src/views/Basket";
+import Address from "./src/views/Address";
+import Shipping from "./src/views/Shipping";
+import Payment from "./src/views/Payment";
+import TermsAndConditions from "./src/views/TermsAndConditions";
+import CustomDrawerComponent from "./src/components/CustomDrawerComponent";
 
 export default class App extends React.Component {
   render() {
@@ -18,74 +25,150 @@ export default class App extends React.Component {
   }
 }
 
-const customComponent = props => {
-  return (
-    <View
-      style={{
-        flex: 1
-      }}
-      {...props}
-    >
-      <Text>CustomComponent</Text>
-    </View>
-  );
-};
+const CheckoutTabNavigator = createMaterialTopTabNavigator({
+  Address: {
+    screen: Address
+  },
+  Shipping: {
+    screen: Shipping
+  },
+  Payment: {
+    screen: Payment
+  }
+});
 
-const DrawerNavigator = createDrawerNavigator(
+const HomeCategoryStack = createStackNavigator(
   {
     Home: {
       screen: Home
+    },
+    Category: {
+      screen: Category
     }
   },
   {
-    initialRouteName: "Home",
-    contentComponent: customComponent
+    defaultNavigationOptions: {
+      header: null
+    }
   }
 );
 
-const StackNavigator = createStackNavigator(
+const HomeStackNavigator = createStackNavigator({
+  HomeCategoryStack: {
+    screen: HomeCategoryStack,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: "Home",
+        headerLeft: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            style={{
+              paddingLeft: 10
+            }}
+          />
+        )
+      };
+    }
+  },
+  Basket: {
+    screen: Basket,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: "Basket",
+        headerLeft: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            style={{
+              paddingLeft: 10
+            }}
+          />
+        )
+      };
+    }
+  },
+  Checkout: {
+    screen: CheckoutTabNavigator,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: "Checkout",
+        headerLeft: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            style={{
+              paddingLeft: 10
+            }}
+          />
+        )
+      };
+    }
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: "Detail",
+        headerLeft: null,
+        headerRight: (
+          <Icon
+            onPress={() => navigation.navigate("Category")}
+            name="ios-close"
+            size={50}
+            style={{
+              paddingRight: 10
+            }}
+          />
+        )
+      };
+    }
+  },
+  TermsAndConditions: {
+    screen: TermsAndConditions,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: "TermsAndConditions",
+        headerLeft: null,
+        headerRight: (
+          <Icon
+            onPress={() => navigation.navigate("Payment")}
+            name="ios-close"
+            size={50}
+            style={{
+              paddingRight: 10
+            }}
+          />
+        )
+      };
+    }
+  }
+});
+
+const HomeDrawNavigator = createDrawerNavigator(
   {
-    Login: {
-      screen: Login,
-      navigationOptions: () => ({
-        header: null,
-        headerBackTitle: null
-      })
-    },
-    Register: {
-      screen: Register,
-      navigationOptions: () => ({
-        headerStyle: {
-          backgroundColor: "#F6F6F6"
-        },
-        headerBackTitle: null
-      })
-    },
-    Demo: {
-      screen: Demo
-    },
-    DrawerNavigator: {
-      screen: DrawerNavigator,
-      navigationOptions: ({ navigation }) => ({
-        header: null
-      })
-      // navigationOptions: ({ navigation }) => ({
-      //   title: "React"
-      //   // headerLeft: (
-      //   //   <TouchableOpacity
-      //   //     onPress={() => {
-      //   //       navigation.dispatch(DrawerActions.toggleDrawer());
-      //   //     }}
-      //   //   >
-      //   //     <Ionicons name="md-menu" color="red" size={30} />
-      //   //   </TouchableOpacity>
-      //   // )
-      // })
+    Home: {
+      screen: HomeStackNavigator
     }
   },
   {
-    initialRouteName: "Login"
+    contentComponent: CustomDrawerComponent
   }
 );
 
-const AppContainer = createAppContainer(StackNavigator);
+const AppSwitchNavigator = createSwitchNavigator({
+  Login: {
+    screen: Login
+  },
+  Register: {
+    screen: Register
+  },
+  Home: {
+    screen: HomeDrawNavigator
+  }
+});
+
+const AppContainer = createAppContainer(AppSwitchNavigator);

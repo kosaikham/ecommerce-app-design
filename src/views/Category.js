@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button } from "react-native";
 
-class Home extends Component {
+class Category extends Component {
   render() {
     return (
       <View
@@ -11,14 +11,14 @@ class Home extends Component {
           alignItems: "center"
         }}
       >
-        <Text>Home</Text>
+        <Text>Category</Text>
         <Button
-          title="go to category"
-          onPress={() => this.props.navigation.navigate("Category")}
+          title="go to Detail"
+          onPress={() => this.props.navigation.navigate("Detail")}
         />
       </View>
     );
   }
 }
 
-export default Home;
+export default Category;
