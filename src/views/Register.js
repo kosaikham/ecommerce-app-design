@@ -21,7 +21,8 @@ class Register extends Component {
 
   componentWillMount() {
     this.formPosition = new Animated.Value(0);
-    this.animatedTitleOpacity = new Animated.Value(1);
+    this.animatedTitleTopMargin = new Animated.Value(20);
+    this.animatedTitleSize = new Animated.Value(70);
 
     this.keyboardWillShowSub = Keyboard.addListener(
       "keyboardWillShow",
@@ -58,11 +59,15 @@ class Register extends Component {
     Animated.parallel([
       Animated.timing(this.formPosition, {
         duration: duration,
-        toValue: -hp("8.25%")
+        toValue: -hp("5.25%")
       }),
-      Animated.timing(this.animatedTitleOpacity, {
+      Animated.timing(this.animatedTitleTopMargin, {
         duration: duration,
         toValue: 0
+      }),
+      Animated.timing(this.animatedTitleSize, {
+        duration: duration,
+        toValue: 50
       })
     ]).start();
   };
@@ -78,9 +83,13 @@ class Register extends Component {
         duration: duration,
         toValue: 0
       }),
-      Animated.timing(this.animatedTitleOpacity, {
+      Animated.timing(this.animatedTitleTopMargin, {
         duration: duration,
-        toValue: 1
+        toValue: 20
+      }),
+      Animated.timing(this.animatedTitleSize, {
+        duration: duration,
+        toValue: 70
       })
     ]).start();
   };
@@ -93,23 +102,26 @@ class Register extends Component {
           backgroundColor: "#F6F6F6"
         }}
       >
-        <View
+        <Animated.View
           style={{
             height: hp("18%"),
+            justifyContent: "center",
             paddingHorizontal: hp("2.5%"),
-            marginTop: Platform.OS == "android" ? hp("3.75%") : null
+            marginTop: this.animatedTitleTopMargin
+            // marginTop: Platform.OS == "android" ? hp("3.75%") : null
           }}
         >
           <Animated.Text
             style={{
-              fontSize: 70,
+              fontSize: this.animatedTitleSize,
               fontWeight: "400",
-              opacity: this.animatedTitleOpacity
+              // opacity: this.animatedTitleOpacity
+              opacity: 1
             }}
           >
             Signup.
           </Animated.Text>
-        </View>
+        </Animated.View>
         <Animated.View
           style={{
             flex: 1,
