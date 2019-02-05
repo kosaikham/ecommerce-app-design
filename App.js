@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import { Font } from "expo";
 import Login from "./src/views/Login";
 import Register from "./src/views/Register";
+import Demo from "./src/views/Playground";
 
 export default class App extends React.Component {
   render() {
@@ -25,10 +25,13 @@ const StackNavigator = createStackNavigator(
           backgroundColor: "#F6F6F6"
         }
       })
+    },
+    Demo: {
+      screen: Demo
     }
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "Register"
   }
 );
 

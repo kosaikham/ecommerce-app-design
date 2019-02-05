@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, ImageBackground, Dimensions } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 import Button from "../components/Button";
 
 class Login extends Component {
@@ -29,8 +33,9 @@ class Login extends Component {
           {/* brandName part */}
           <Text
             style={{
+              // fontSize: hp("11.25%"),
               fontSize: 90,
-              fontWeight: "600"
+              fontWeight: "bold"
             }}
           >
             fash.
@@ -55,7 +60,8 @@ class Login extends Component {
             style={{
               flex: 1,
               width: null,
-              height: 550
+              height: hp("78%")
+              // height: 550
             }}
           >
             <View
@@ -68,8 +74,8 @@ class Login extends Component {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  paddingBottom: 40,
-                  paddingHorizontal: 20
+                  paddingBottom: hp("5%"),
+                  paddingHorizontal: hp("2.5%")
                 }}
               >
                 <Button
