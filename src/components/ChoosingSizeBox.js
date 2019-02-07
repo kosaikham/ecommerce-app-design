@@ -8,6 +8,7 @@ import {
 class ChoosingBoxSize extends Component {
   render() {
     const {
+      color,
       top,
       opacity,
       firstItem,
@@ -49,14 +50,17 @@ class ChoosingBoxSize extends Component {
         >
           <View
             style={{
-              backgroundColor: "gray",
+              backgroundColor: color ? "white" : "gray",
               width: wp("4.3%"),
-              height: wp("4.3%")
+              height: wp("4.3%"),
+              borderWidth: color ? 1 : 0,
+              borderColor: color ? firstItem : null
             }}
           />
           <Text
             style={{
-              paddingLeft: 15
+              paddingLeft: 15,
+              textTransform: "capitalize"
             }}
           >
             {firstItem}
@@ -71,14 +75,17 @@ class ChoosingBoxSize extends Component {
         >
           <View
             style={{
-              backgroundColor: "gray",
+              backgroundColor: color ? "white" : "gray",
               width: wp("4.3%"),
-              height: wp("4.3%")
+              height: wp("4.3%"),
+              borderWidth: color ? 1 : 0,
+              borderColor: color ? secondItem : null
             }}
           />
           <Text
             style={{
-              paddingLeft: 15
+              paddingLeft: 15,
+              textTransform: "capitalize"
             }}
           >
             {secondItem}
@@ -92,14 +99,17 @@ class ChoosingBoxSize extends Component {
         >
           <View
             style={{
-              backgroundColor: "gray",
+              backgroundColor: color ? "white" : "gray",
               width: wp("4.3%"),
-              height: wp("4.3%")
+              height: wp("4.3%"),
+              borderWidth: color ? 1 : 0,
+              borderColor: color ? thirdItem : null
             }}
           />
           <Text
             style={{
-              paddingLeft: 15
+              paddingLeft: 15,
+              textTransform: "capitalize"
             }}
           >
             {thirdItem}

@@ -22,8 +22,8 @@ const { width } = Dimensions.get("window");
 class Detail extends Component {
   state = {
     defaultBox: null,
-    size: "Small",
-    color: "Black",
+    size: "small",
+    color: "black",
     sizeBoxOpen: false,
     colorBoxOpen: false,
     colorIconName: "ios-arrow-down",
@@ -181,25 +181,26 @@ class Detail extends Component {
           {/* ChoosingSizeBox */}
           {this.state.defaultBox === "colorBox" ? (
             <ChoosingSizeBox
+              color={true}
               top={this.colorBox}
               opacity={animatedColorBoxOpacity}
-              firstItem="Black"
-              secondItem="Yellow"
-              thirdItem="Blue"
-              onPressFirst={() => this.onChooseColor("Black")}
-              onPressSecond={() => this.onChooseColor("Yellow")}
-              onPressThird={() => this.onChooseColor("Blue")}
+              firstItem="black"
+              secondItem="yellow"
+              thirdItem="blue"
+              onPressFirst={() => this.onChooseColor("black")}
+              onPressSecond={() => this.onChooseColor("yellow")}
+              onPressThird={() => this.onChooseColor("blue")}
             />
           ) : (
             <ChoosingSizeBox
               top={this.sizeBox}
               opacity={animatedSizeBoxOpacity}
-              firstItem="Small"
-              secondItem="Medium"
-              thirdItem="Large"
-              onPressFirst={() => this.onChooseItem("Small")}
-              onPressSecond={() => this.onChooseItem("Medium")}
-              onPressThird={() => this.onChooseItem("Large")}
+              firstItem="small"
+              secondItem="medium"
+              thirdItem="large"
+              onPressFirst={() => this.onChooseItem("small")}
+              onPressSecond={() => this.onChooseItem("medium")}
+              onPressThird={() => this.onChooseItem("large")}
             />
           )}
           {/* ChoosingSizeBox */}
@@ -243,7 +244,7 @@ class Detail extends Component {
                   >
                     <View
                       style={{
-                        backgroundColor: "black",
+                        backgroundColor: this.state.color,
                         width: wp("4.5%"),
                         height: wp("4.5%"),
                         marginRight: 15
@@ -252,7 +253,8 @@ class Detail extends Component {
                     <Text
                       style={{
                         fontSize: 16,
-                        color: "gray"
+                        color: "gray",
+                        textTransform: "capitalize"
                       }}
                     >
                       {this.state.color}
@@ -292,7 +294,8 @@ class Detail extends Component {
                     style={{
                       fontSize: 16,
                       color: "gray",
-                      marginLeft: 15
+                      marginLeft: 15,
+                      textTransform: "capitalize"
                     }}
                   >
                     {this.state.size}
