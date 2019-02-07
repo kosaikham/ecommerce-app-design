@@ -113,6 +113,7 @@ class Category extends Component {
   state = {
     currentIndex: 0
   };
+
   renderCategory = () => {
     return CATEGORY.map((item, i) => {
       return (
@@ -130,6 +131,7 @@ class Category extends Component {
       );
     });
   };
+
   renderItemList_Dress = () => {
     return DRESSES.map((item, i) => {
       return (

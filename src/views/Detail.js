@@ -5,7 +5,9 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated,
+  TouchableWithoutFeedback
 } from "react-native";
 import {
   heightPercentageToDP as hp,
@@ -17,7 +19,50 @@ import StarRating from "react-native-star-rating";
 const { width } = Dimensions.get("window");
 
 class Detail extends Component {
+  state = {
+    size: "Small",
+    sizeBoxOpen: false,
+    iconName: "ios-arrow-down"
+  };
+
+  componentWillMount() {
+    this.sizeBox = new Animated.Value(hp("65%"));
+  }
+
+  openSizeBox = () => {
+    this.setState(
+      (prevState, props) => {
+        return {
+          sizeBoxOpen: !prevState.sizeBoxOpen,
+          iconName:
+            prevState.iconName === "ios-arrow-down"
+              ? "ios-arrow-up"
+              : "ios-arrow-down"
+        };
+      },
+      () => {
+        if (this.state.sizeBoxOpen) {
+          Animated.timing(this.sizeBox, {
+            toValue: hp("30%"),
+            duration: 400
+          }).start();
+        } else {
+          Animated.timing(this.sizeBox, {
+            toValue: hp("65%"),
+            duration: 400
+          }).start();
+        }
+      }
+    );
+  };
+
   render() {
+    const animatedSizeBoxOpacity = this.sizeBox.interpolate({
+      inputRange: [hp("30%"), hp("65%")],
+      outputRange: [1, 0],
+      extrapolate: "clamp"
+    });
+
     const {
       detailName,
       detailImageUri,
@@ -49,12 +94,104 @@ class Detail extends Component {
             />
           </View>
           {/* image */}
+
+          {/* ChoosingSizeBox */}
+          <Animated.View
+            style={{
+              height: hp("35%"),
+              backgroundColor: "rgba(255,255,255,0.7)",
+              position: "absolute",
+              top: this.sizeBox,
+              left: 0,
+              right: 0,
+              zIndex: 100,
+              justifyContent: "space-around",
+              paddingHorizontal: 15,
+              opacity: animatedSizeBoxOpacity
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 22,
+                color: "#5BBC9D",
+                fontWeight: "bold"
+              }}
+            >
+              Choose a size
+            </Text>
+            <TouchableOpacity
+              onPress={() => this.setState({ size: "Small" })}
+              style={{
+                flexDirection: "row"
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "gray",
+                  width: wp("4.3%"),
+                  height: wp("4.3%")
+                }}
+              />
+              <Text
+                style={{
+                  paddingLeft: 15
+                }}
+              >
+                Small (S)
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({ size: "Medium" })}
+              style={{
+                flexDirection: "row"
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "gray",
+                  width: wp("4.3%"),
+                  height: wp("4.3%")
+                }}
+              />
+              <Text
+                style={{
+                  paddingLeft: 15
+                }}
+              >
+                Medium (M)
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({ size: "Large" })}
+              style={{
+                flexDirection: "row"
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "gray",
+                  width: wp("4.3%"),
+                  height: wp("4.3%")
+                }}
+              />
+              <Text
+                style={{
+                  paddingLeft: 15
+                }}
+              >
+                Large (L)
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
+          {/* ChoosingSizeBox */}
+
           {/* priceBox */}
           <View
             style={{
               flex: 1,
               borderBottomWidth: 1,
-              borderBottomColor: "gray"
+              borderBottomColor: "gray",
+              zIndex: 200
             }}
           >
             <View
@@ -117,42 +254,40 @@ class Detail extends Component {
                 </View>
               </View>
               {/* left */}
+
               {/* right */}
-              <View
-                style={{
-                  width: wp("45%"),
-                  flexDirection: "row",
-                  borderWidth: 0.8,
-                  borderColor: "gray",
-                  borderRadius: 2,
-                  padding: 5,
-                  justifyContent: "space-between"
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: "gray",
-                    marginLeft: 15
-                  }}
-                >
-                  Small
-                </Text>
+              <TouchableWithoutFeedback onPress={() => this.openSizeBox()}>
                 <View
                   style={{
-                    flex: 1,
-                    alignItems: "flex-end",
-                    paddingRight: 15
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: wp("45%"),
+                    borderWidth: 0.8,
+                    borderColor: "gray",
+                    borderRadius: 2,
+                    padding: 5
                   }}
                 >
-                  <Icon
-                    onPress={() => alert("something")}
-                    name="ios-arrow-down"
-                    size={20}
-                    color="gray"
-                  />
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "gray",
+                      marginLeft: 15
+                    }}
+                  >
+                    {this.state.size}
+                  </Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: "flex-end",
+                      paddingRight: 15
+                    }}
+                  >
+                    <Icon name={this.state.iconName} size={20} color="gray" />
+                  </View>
                 </View>
-              </View>
+              </TouchableWithoutFeedback>
               {/* right */}
             </View>
             <View
@@ -236,6 +371,7 @@ class Detail extends Component {
             </View>
           </View>
           {/* priceBox */}
+
           {/* DescriptionBox */}
           <View
             style={{
@@ -361,6 +497,7 @@ class Detail extends Component {
             {/* lower */}
           </View>
           {/* DescriptionBox */}
+
           {/* reviews */}
           <View
             style={{
@@ -379,6 +516,7 @@ class Detail extends Component {
             </Text>
           </View>
           {/* reviews */}
+
           {/* reviewBox */}
           <View
             style={{
