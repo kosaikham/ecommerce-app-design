@@ -34,6 +34,7 @@ class Detail extends Component {
 
   componentWillMount() {
     this.sizeBox = new Animated.Value(hp("65%"));
+    this.colorBox = new Animated.Value(hp("65%"));
   }
 
   onChooseItem = item => {
@@ -48,18 +49,32 @@ class Detail extends Component {
     this.setState(
       (prevState, props) => {
         return {
+          sizeBoxOpen: false,
           colorBoxOpen: !prevState.colorBoxOpen,
           colorIconName:
             prevState.colorIconName === "ios-arrow-down"
               ? "ios-arrow-up"
               : "ios-arrow-down",
+          iconName: "ios-arrow-down",
           colorBorderColor:
             prevState.colorBorderColor === "gray" ? "black" : "gray",
+          sizeBorderColor: "gray",
           defaultBox: "colorBox"
         };
       },
       () => {
         if (this.state.colorBoxOpen) {
+          Animated.timing(this.colorBox, {
+            toValue: hp("30%"),
+            duration: 400
+          }).start();
+        } else {
+          Animated.timing(this.colorBox, {
+            toValue: hp("65%"),
+            duration: 400
+          }).start();
+        }
+        if (this.state.sizeBoxOpen) {
           Animated.timing(this.sizeBox, {
             toValue: hp("30%"),
             duration: 400
@@ -78,13 +93,16 @@ class Detail extends Component {
     this.setState(
       (prevState, props) => {
         return {
+          colorBoxOpen: false,
           sizeBoxOpen: !prevState.sizeBoxOpen,
           iconName:
             prevState.iconName === "ios-arrow-down"
               ? "ios-arrow-up"
               : "ios-arrow-down",
+          colorIconName: "ios-arrow-down",
           sizeBorderColor:
             prevState.sizeBorderColor === "gray" ? "black" : "gray",
+          colorBorderColor: "gray",
           defaultBox: "sizeBox"
         };
       },
@@ -100,12 +118,29 @@ class Detail extends Component {
             duration: 400
           }).start();
         }
+        if (this.state.colorBoxOpen) {
+          Animated.timing(this.colorBox, {
+            toValue: hp("30%"),
+            duration: 400
+          }).start();
+        } else {
+          Animated.timing(this.colorBox, {
+            toValue: hp("65%"),
+            duration: 400
+          }).start();
+        }
       }
     );
   };
 
   render() {
     const animatedSizeBoxOpacity = this.sizeBox.interpolate({
+      inputRange: [hp("30%"), hp("65%")],
+      outputRange: [1, 0],
+      extrapolate: "clamp"
+    });
+
+    const animatedColorBoxOpacity = this.colorBox.interpolate({
       inputRange: [hp("30%"), hp("65%")],
       outputRange: [1, 0],
       extrapolate: "clamp"
@@ -146,8 +181,8 @@ class Detail extends Component {
           {/* ChoosingSizeBox */}
           {this.state.defaultBox === "colorBox" ? (
             <ChoosingSizeBox
-              top={this.sizeBox}
-              opacity={animatedSizeBoxOpacity}
+              top={this.colorBox}
+              opacity={animatedColorBoxOpacity}
               firstItem="Black"
               secondItem="Yellow"
               thirdItem="Blue"
