@@ -11,6 +11,7 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-responsive-screen": "^1.2.0",
+    "react-native-star-rating": "^1.1.0",
     "react-navigation": "^3.0.9"
   },
   "devDependencies": {

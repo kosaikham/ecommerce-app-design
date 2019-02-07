@@ -156,6 +156,14 @@ class Category extends Component {
     return SHOES.map((item, i) => {
       return (
         <ItemList
+          onPress={() =>
+            this.props.navigation.navigate("Detail", {
+              detailName: item.name,
+              detailImageUri: item.imageUri,
+              detailPriceOne: item.priceOne,
+              detailPriceTwo: item.priceTwo ? item.priceTwo : null
+            })
+          }
           key={item.id}
           imageUri={item.imageUri}
           name={item.name}
