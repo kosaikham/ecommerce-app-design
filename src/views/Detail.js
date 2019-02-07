@@ -15,19 +15,64 @@ import {
 } from "react-native-responsive-screen";
 import Icon from "@expo/vector-icons/Ionicons";
 import StarRating from "react-native-star-rating";
+import ChoosingSizeBox from "../components/ChoosingSizeBox";
 
 const { width } = Dimensions.get("window");
 
 class Detail extends Component {
   state = {
+    defaultBox: null,
     size: "Small",
+    color: "Black",
     sizeBoxOpen: false,
-    iconName: "ios-arrow-down"
+    colorBoxOpen: false,
+    colorIconName: "ios-arrow-down",
+    iconName: "ios-arrow-down",
+    sizeBorderColor: "gray",
+    colorBorderColor: "gray"
   };
 
   componentWillMount() {
     this.sizeBox = new Animated.Value(hp("65%"));
   }
+
+  onChooseItem = item => {
+    this.setState({ size: item });
+  };
+
+  onChooseColor = item => {
+    this.setState({ color: item });
+  };
+
+  openColorBox = () => {
+    this.setState(
+      (prevState, props) => {
+        return {
+          colorBoxOpen: !prevState.colorBoxOpen,
+          colorIconName:
+            prevState.colorIconName === "ios-arrow-down"
+              ? "ios-arrow-up"
+              : "ios-arrow-down",
+          colorBorderColor:
+            prevState.colorBorderColor === "gray" ? "black" : "gray",
+          defaultBox: "colorBox"
+        };
+      },
+      () => {
+        if (this.state.colorBoxOpen) {
+          Animated.timing(this.sizeBox, {
+            toValue: hp("30%"),
+            duration: 400
+          }).start();
+        } else {
+          Animated.timing(this.sizeBox, {
+            toValue: hp("65%"),
+            duration: 400
+          }).start();
+        }
+      }
+    );
+  };
 
   openSizeBox = () => {
     this.setState(
@@ -37,7 +82,10 @@ class Detail extends Component {
           iconName:
             prevState.iconName === "ios-arrow-down"
               ? "ios-arrow-up"
-              : "ios-arrow-down"
+              : "ios-arrow-down",
+          sizeBorderColor:
+            prevState.sizeBorderColor === "gray" ? "black" : "gray",
+          defaultBox: "sizeBox"
         };
       },
       () => {
@@ -96,93 +144,29 @@ class Detail extends Component {
           {/* image */}
 
           {/* ChoosingSizeBox */}
-          <Animated.View
-            style={{
-              height: hp("35%"),
-              backgroundColor: "rgba(255,255,255,0.7)",
-              position: "absolute",
-              top: this.sizeBox,
-              left: 0,
-              right: 0,
-              zIndex: 100,
-              justifyContent: "space-around",
-              paddingHorizontal: 15,
-              opacity: animatedSizeBoxOpacity
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 22,
-                color: "#5BBC9D",
-                fontWeight: "bold"
-              }}
-            >
-              Choose a size
-            </Text>
-            <TouchableOpacity
-              onPress={() => this.setState({ size: "Small" })}
-              style={{
-                flexDirection: "row"
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: "gray",
-                  width: wp("4.3%"),
-                  height: wp("4.3%")
-                }}
-              />
-              <Text
-                style={{
-                  paddingLeft: 15
-                }}
-              >
-                Small (S)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.setState({ size: "Medium" })}
-              style={{
-                flexDirection: "row"
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: "gray",
-                  width: wp("4.3%"),
-                  height: wp("4.3%")
-                }}
-              />
-              <Text
-                style={{
-                  paddingLeft: 15
-                }}
-              >
-                Medium (M)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.setState({ size: "Large" })}
-              style={{
-                flexDirection: "row"
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: "gray",
-                  width: wp("4.3%"),
-                  height: wp("4.3%")
-                }}
-              />
-              <Text
-                style={{
-                  paddingLeft: 15
-                }}
-              >
-                Large (L)
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
+          {this.state.defaultBox === "colorBox" ? (
+            <ChoosingSizeBox
+              top={this.sizeBox}
+              opacity={animatedSizeBoxOpacity}
+              firstItem="Black"
+              secondItem="Yellow"
+              thirdItem="Blue"
+              onPressFirst={() => this.onChooseColor("Black")}
+              onPressSecond={() => this.onChooseColor("Yellow")}
+              onPressThird={() => this.onChooseColor("Blue")}
+            />
+          ) : (
+            <ChoosingSizeBox
+              top={this.sizeBox}
+              opacity={animatedSizeBoxOpacity}
+              firstItem="Small"
+              secondItem="Medium"
+              thirdItem="Large"
+              onPressFirst={() => this.onChooseItem("Small")}
+              onPressSecond={() => this.onChooseItem("Medium")}
+              onPressThird={() => this.onChooseItem("Large")}
+            />
+          )}
           {/* ChoosingSizeBox */}
 
           {/* priceBox */}
@@ -204,55 +188,56 @@ class Detail extends Component {
             >
               {/* up bar */}
               {/* left */}
-              <View
-                style={{
-                  width: wp("45%"),
-                  flexDirection: "row",
-                  borderWidth: 0.8,
-                  borderColor: "gray",
-                  borderRadius: 2,
-                  padding: 5
-                }}
-              >
+              <TouchableWithoutFeedback onPress={() => this.openColorBox()}>
                 <View
                   style={{
-                    flex: 2,
+                    width: wp("45%"),
                     flexDirection: "row",
-                    alignItems: "center"
+                    borderWidth: 0.8,
+                    borderColor: this.state.colorBorderColor,
+                    borderRadius: 2,
+                    padding: 5
                   }}
                 >
                   <View
                     style={{
-                      backgroundColor: "black",
-                      width: wp("4.5%"),
-                      height: wp("4.5%"),
-                      marginRight: 15
-                    }}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "gray"
+                      flex: 2,
+                      flexDirection: "row",
+                      alignItems: "center"
                     }}
                   >
-                    Black
-                  </Text>
+                    <View
+                      style={{
+                        backgroundColor: "black",
+                        width: wp("4.5%"),
+                        height: wp("4.5%"),
+                        marginRight: 15
+                      }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: "gray"
+                      }}
+                    >
+                      {this.state.color}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: "flex-end",
+                      paddingRight: 15
+                    }}
+                  >
+                    <Icon
+                      name={this.state.colorIconName}
+                      size={20}
+                      color="gray"
+                    />
+                  </View>
                 </View>
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "flex-end",
-                    paddingRight: 15
-                  }}
-                >
-                  <Icon
-                    onPress={() => alert("something")}
-                    name="ios-arrow-down"
-                    size={20}
-                    color="gray"
-                  />
-                </View>
-              </View>
+              </TouchableWithoutFeedback>
               {/* left */}
 
               {/* right */}
@@ -263,7 +248,7 @@ class Detail extends Component {
                     justifyContent: "space-between",
                     width: wp("45%"),
                     borderWidth: 0.8,
-                    borderColor: "gray",
+                    borderColor: this.state.sizeBorderColor,
                     borderRadius: 2,
                     padding: 5
                   }}
