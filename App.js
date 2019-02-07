@@ -37,35 +37,73 @@ const CheckoutTabNavigator = createMaterialTopTabNavigator({
   }
 });
 
-const HomeCategoryStack = createStackNavigator(
-  {
-    Home: {
-      screen: Home
-    },
-    Category: {
-      screen: Category
-    }
-  },
-  {
-    defaultNavigationOptions: {
-      header: null
-    }
-  }
-);
-
 const HomeStackNavigator = createStackNavigator({
-  HomeCategoryStack: {
-    screen: HomeCategoryStack,
+  Home: {
+    screen: Home,
     navigationOptions: ({ navigation }) => {
       return {
         headerTitle: "Home",
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
         headerLeft: (
           <Icon
             onPress={() => navigation.openDrawer()}
             name="md-menu"
+            color="white"
             size={30}
             style={{
               paddingLeft: 10
+            }}
+          />
+        ),
+        headerRight: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="ios-search"
+            color="white"
+            size={30}
+            style={{
+              paddingRight: 10
+            }}
+          />
+        )
+      };
+    }
+  },
+  Category: {
+    screen: Category,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: navigation.state.params.name,
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
+        headerLeft: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            color="white"
+            size={30}
+            style={{
+              paddingLeft: 10
+            }}
+          />
+        ),
+        headerRight: (
+          <Icon
+            onPress={() => navigation.openDrawer()}
+            name="md-cart"
+            color="white"
+            size={30}
+            style={{
+              paddingRight: 10
             }}
           />
         )
@@ -77,6 +115,12 @@ const HomeStackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => {
       return {
         headerTitle: "Basket",
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
         headerLeft: (
           <Icon
             onPress={() => navigation.openDrawer()}
@@ -94,6 +138,12 @@ const HomeStackNavigator = createStackNavigator({
     screen: CheckoutTabNavigator,
     navigationOptions: ({ navigation }) => {
       return {
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
         headerTitle: "Checkout",
         headerLeft: (
           <Icon
@@ -112,12 +162,19 @@ const HomeStackNavigator = createStackNavigator({
     screen: Detail,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: "Detail",
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
+        headerTitle: navigation.state.params.detailName,
         headerLeft: null,
         headerRight: (
           <Icon
             onPress={() => navigation.navigate("Category")}
             name="ios-close"
+            color="white"
             size={50}
             style={{
               paddingRight: 10
@@ -131,6 +188,12 @@ const HomeStackNavigator = createStackNavigator({
     screen: TermsAndConditions,
     navigationOptions: ({ navigation }) => {
       return {
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
         headerTitle: "TermsAndConditions",
         headerLeft: null,
         headerRight: (
