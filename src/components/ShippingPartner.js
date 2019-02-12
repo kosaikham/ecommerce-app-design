@@ -35,7 +35,7 @@ class ShippingPartner extends Component {
           />
           <View
             style={{
-              width: wp("15%"),
+              width: wp("20%"),
               height: wp("15%")
             }}
           >
@@ -45,7 +45,7 @@ class ShippingPartner extends Component {
                 flex: 1,
                 width: null,
                 height: null,
-                resizeMode: "cover"
+                resizeMode: "contain"
               }}
             />
           </View>

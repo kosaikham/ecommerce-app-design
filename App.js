@@ -18,6 +18,7 @@ import Address from "./src/views/Address";
 import Shipping from "./src/views/Shipping";
 import Payment from "./src/views/Payment";
 import TermsAndConditions from "./src/views/TermsAndConditions";
+import CreditCard from "./src/views/CreditCard";
 import CustomDrawerComponent from "./src/components/CustomDrawerComponent";
 
 export default class App extends React.Component {
@@ -25,6 +26,22 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
+
+const paymentStackNavigator = createStackNavigator(
+  {
+    Payment: {
+      screen: Payment
+    },
+    CreditCard: {
+      screen: CreditCard
+    }
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
 
 const CheckoutTabNavigator = createMaterialTopTabNavigator(
   {
@@ -35,7 +52,7 @@ const CheckoutTabNavigator = createMaterialTopTabNavigator(
       screen: Shipping
     },
     Payment: {
-      screen: Payment
+      screen: paymentStackNavigator
     }
   },
   {
