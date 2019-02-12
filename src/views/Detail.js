@@ -181,6 +181,7 @@ class Detail extends Component {
           {/* ChoosingSizeBox */}
           {this.state.defaultBox === "colorBox" ? (
             <ChoosingSizeBox
+              label="Choosing a color"
               color={true}
               top={this.colorBox}
               opacity={animatedColorBoxOpacity}
@@ -193,6 +194,7 @@ class Detail extends Component {
             />
           ) : (
             <ChoosingSizeBox
+              label="Choosing a size"
               top={this.sizeBox}
               opacity={animatedSizeBoxOpacity}
               firstItem="small"

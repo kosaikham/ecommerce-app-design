@@ -13,6 +13,7 @@ import Home from "./src/views/Home";
 import Category from "./src/views/Category";
 import Detail from "./src/views/Detail";
 import Basket from "./src/views/Basket";
+import EditBasket from "./src/views/EditBasket";
 import Address from "./src/views/Address";
 import Shipping from "./src/views/Shipping";
 import Payment from "./src/views/Payment";
@@ -25,17 +26,31 @@ export default class App extends React.Component {
   }
 }
 
-const CheckoutTabNavigator = createMaterialTopTabNavigator({
-  Address: {
-    screen: Address
+const CheckoutTabNavigator = createMaterialTopTabNavigator(
+  {
+    Address: {
+      screen: Address
+    },
+    Shipping: {
+      screen: Shipping
+    },
+    Payment: {
+      screen: Payment
+    }
   },
-  Shipping: {
-    screen: Shipping
-  },
-  Payment: {
-    screen: Payment
+  {
+    swipeEnabled: false,
+    tabBarOptions: {
+      activeTintColor: "#F08C4F",
+      style: {
+        backgroundColor: "#63CBA7"
+      },
+      indicatorStyle: {
+        backgroundColor: "#F08C4F"
+      }
+    }
   }
-});
+);
 
 const HomeStackNavigator = createStackNavigator({
   Home: {
@@ -180,7 +195,8 @@ const HomeStackNavigator = createStackNavigator({
               paddingRight: 10
             }}
           />
-        )
+        ),
+        gesturesEnabled: false
       };
     }
   },
@@ -200,12 +216,41 @@ const HomeStackNavigator = createStackNavigator({
           <Icon
             onPress={() => navigation.navigate("Payment")}
             name="ios-close"
+            color="white"
             size={50}
             style={{
               paddingRight: 10
             }}
           />
-        )
+        ),
+        gesturesEnabled: false
+      };
+    }
+  },
+  EditBasket: {
+    screen: EditBasket,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitleStyle: {
+          color: "white"
+        },
+        headerStyle: {
+          backgroundColor: "#5BBC9D"
+        },
+        headerTitle: "Edit Basket Item",
+        headerLeft: null,
+        headerRight: (
+          <Icon
+            onPress={() => navigation.navigate("Basket")}
+            name="ios-checkmark"
+            color="white"
+            size={50}
+            style={{
+              paddingRight: 10
+            }}
+          />
+        ),
+        gesturesEnabled: false
       };
     }
   }

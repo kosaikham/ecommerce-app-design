@@ -16,31 +16,44 @@ class ChoosingBoxSize extends Component {
       thirdItem,
       onPressFirst,
       onPressSecond,
-      onPressThird
+      onPressThird,
+      onBasketPage,
+      label
     } = this.props;
     return (
       <Animated.View
-        style={{
-          height: hp("35%"),
-          backgroundColor: "rgba(255,255,255,0.7)",
-          position: "absolute",
-          top: top, // props
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          justifyContent: "space-around",
-          paddingHorizontal: 15,
-          opacity: opacity // props
-        }}
+        style={[
+          {
+            height: hp("35%"),
+            backgroundColor: "rgba(255,255,255,0.7)",
+            position: "absolute",
+            top: top, // props
+            left: 0,
+            right: 0,
+            zIndex: 100,
+            justifyContent: "space-around",
+            paddingHorizontal: 15,
+            opacity: opacity // props
+          },
+          onBasketPage
+            ? {
+                position: "relative",
+                top: null,
+                left: null,
+                right: null,
+                height: hp("25%")
+              }
+            : null
+        ]}
       >
         <Text
           style={{
-            fontSize: 22,
+            fontSize: 18,
             color: "#5BBC9D",
             fontWeight: "bold"
           }}
         >
-          Choose a size
+          {label}
         </Text>
         <TouchableOpacity
           onPress={onPressFirst} // props
