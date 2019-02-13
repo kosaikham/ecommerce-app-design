@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, ImageBackground, Dimensions } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { View, Text, ImageBackground } from "react-native";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Button from "../components/Button";
 
 class Login extends Component {

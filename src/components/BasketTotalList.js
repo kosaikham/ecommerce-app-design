@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
-} from "react-native-responsive-screen";
 
 class BasketTotalList extends Component {
   render() {

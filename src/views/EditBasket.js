@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { View } from "react-native";
 import BasketItem from "../components/BasketItem";
 import ChoosingSizeBox from "../components/ChoosingSizeBox";
 

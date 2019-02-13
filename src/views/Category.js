@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, Dimensions, Image } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp
@@ -7,7 +7,6 @@ import {
 import Icon from "@expo/vector-icons/Ionicons";
 import ItemList from "../components/ItemList";
 
-const { width } = Dimensions.get("window");
 const CATEGORY = [
   "Dresses",
   "Shoes",

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import FAIcon from "@expo/vector-icons/FontAwesome";
 import Icon from "@expo/vector-icons/Ionicons";
 

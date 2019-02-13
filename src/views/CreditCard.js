@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import Icon from "@expo/vector-icons/Ionicons";
 import Input from "../components/Input";
 

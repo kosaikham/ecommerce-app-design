@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, ImageBackground } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { View, ScrollView } from "react-native";
 import HomeCategory from "../components/HomeCategory";
 
 class Home extends Component {

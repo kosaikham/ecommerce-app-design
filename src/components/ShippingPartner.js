@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 class ShippingPartner extends Component {
   render() {

@@ -7,10 +7,7 @@ import {
   Animated,
   Keyboard
 } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from "react-native-responsive-screen";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
