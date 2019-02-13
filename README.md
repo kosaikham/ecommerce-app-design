@@ -9,7 +9,7 @@ This is my practicing small project for designing ecommerce app layout. It doesn
 ## Demo
 
 <p align="center">
-  <img src ="https://i.imgur.com/8khjFnW.gif" width=500>
+  <img src="https://i.imgur.com/8khjFnW.gif" width=500>
 </p>
 
 ## What I Learned
