@@ -8,9 +8,9 @@ This is my practicing small project for designing ecommerce app layout. It doesn
 
 ## Demo
 
-<p align="center">
-  <img src="https://i.imgur.com/8khjFnW.gif" width=500>
-</p>
+Video:
+
+[![Ecommerce App layout Design](https://img.youtube.com/vi/iUqjlzTGGbU/0.jpg)](https://www.youtube.com/watch?v=iUqjlzTGGbU "Click to play on Youtube.com")
 
 ## What I Learned
 
