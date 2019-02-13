@@ -1,4 +1,5 @@
 import React from "react";
+import { Dimensions } from "react-native";
 import {
   createStackNavigator,
   createSwitchNavigator,
@@ -130,7 +131,7 @@ const HomeStackNavigator = createStackNavigator({
         ),
         headerRight: (
           <Icon
-            onPress={() => navigation.openDrawer()}
+            onPress={() => navigation.navigate("Basket")}
             name="md-cart"
             color="white"
             size={30}
@@ -227,11 +228,11 @@ const HomeStackNavigator = createStackNavigator({
         headerStyle: {
           backgroundColor: "#5BBC9D"
         },
-        headerTitle: "TermsAndConditions",
+        headerTitle: "Terms & Conditions",
         headerLeft: null,
         headerRight: (
           <Icon
-            onPress={() => navigation.navigate("Payment")}
+            onPress={() => navigation.navigate("CreditCard")}
             name="ios-close"
             color="white"
             size={50}
@@ -280,6 +281,7 @@ const HomeDrawNavigator = createDrawerNavigator(
     }
   },
   {
+    drawerWidth: Dimensions.get("window").width,
     contentComponent: CustomDrawerComponent
   }
 );
